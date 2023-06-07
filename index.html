@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather search</title>
+<style> 
+ #header{
+    color:rgb(173, 111, 41);
+    background-color: aquamarine;
+    height: 90px;
+    text-align: center;
+    font-size: 2000px;
+    padding-top: 105px;
+    font-weight: bolder;
+ }
+
+#main{ 
+    width: 100;
+ height: 100;
+    background-image: url("/1.jpg");
+background-size:100rem 70rem ;
+background-attachment: scroll;
+background-repeat: no-repeat; 
+
+}
+
+#city{
+text-indent: 22px;
+font-size: larger;
+}
+#hello{
+
+    text-align: center;
+    justify-content:baseline;
+    padding-top: 6rem;
+
+}
+
+</style>
+
+
+</head>
+<body id="main">
+    <header id="header"> weather near you </header>
+<div id="hello">
+  
+    <p id="output" > enter your city name here</p> 
+
+    <input id="city" >
+
+
+    <button onclick="show_temp()">Submit</button>
+
+ </div>
+  
+<script type="text/javascript"> 
+function show_temp() {
+
+city= document.getElementById("city").value;
+
+
+httpRequest=new XMLHttpRequest();
+url= "https://api.weatherbit.io/v2.0/current?city="+city+"&key=07aee1dbdc204870ab45f6f412722a0a"
+httpRequest.open("GET", url);
+
+httpRequest.send();
+
+httpRequest.onreadystatechange= function()
+{
+    if(this.readyState == 4 && this.status == 200 )
+    {
+
+user_data=JSON.parse(this.responseText);
+document.getElementById("output").innerHTML=user_data.data[0].temp;
+    }
+}}
+ </script>
+
+</body>
+</html>
